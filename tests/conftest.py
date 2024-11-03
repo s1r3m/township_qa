@@ -34,4 +34,5 @@ def driver() -> YieldFixture[WebDriver]:
 @pytest.fixture
 def main_page(driver) -> MainPage:
     page = MainPage(driver)
+    page._wait_page_loaded()
     return page
