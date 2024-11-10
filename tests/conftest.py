@@ -1,16 +1,12 @@
-from typing import Generator, TypeVar
-
 import pytest
 from appium import webdriver
 from appium.options.common import AppiumOptions
 from appium.webdriver.webdriver import WebDriver
 
 from settings import DEBUG, DEVICE_NAME, DEVICE_UDID, PLATFORM_NAME, PLATFORM_VERSION
-from township_qa.constants import APP_NAME, APP_START_ACTIVITY
-from township_qa.pages.main_page import MainPage
-
-T = TypeVar('T')
-YieldFixture = Generator[T, None, None]
+from township_qa.constants import APP_NAME, AppActivity
+from township_qa.helpers import YieldFixture
+from township_qa.pages.main_page import TutorialPage
 
 
 @pytest.fixture
@@ -22,7 +18,7 @@ def driver() -> YieldFixture[WebDriver]:
     options.set_capability('udid', DEVICE_UDID)
     options.set_capability('appPackage', APP_NAME)
     options.set_capability('printPageSourceOnFindFailure', DEBUG)
-    options.set_capability('appActivity', APP_START_ACTIVITY)
+    options.set_capability('appActivity', AppActivity.LAUNCHER)
     options.set_capability('automationName', 'UiAutomator2')
     driver = webdriver.Remote('http://localhost:4723', options=options)
 
@@ -32,7 +28,6 @@ def driver() -> YieldFixture[WebDriver]:
 
 
 @pytest.fixture
-def main_page(driver) -> MainPage:
-    page = MainPage(driver)
-    page._wait_page_loaded()
+def tutorial_page(driver: WebDriver) -> TutorialPage:
+    page = TutorialPage(driver)
     return page
