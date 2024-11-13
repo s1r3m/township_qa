@@ -12,7 +12,7 @@ class TutorialPage(BasePage):
         self.ernie = IMAGE_PATH / 'ernie.png'
         self.empty_field = IMAGE_PATH / 'empty_field.png'
         self.empty_field_2 = IMAGE_PATH / 'empty_field_2.png'
-        self.wheat = IMAGE_PATH / 'wheat_small.png'
+        self.wheat = IMAGE_PATH / 'wheat.png'
         self.planted_wheat = IMAGE_PATH / 'planted_wheat.png'
         self.planted_wheat_2 = IMAGE_PATH / 'planted_wheat_2.png'
 
