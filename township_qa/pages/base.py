@@ -2,8 +2,10 @@ from appium.webdriver.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from settings import WAIT_TIMEOUT
+from settings import THRESHOLD, WAIT_TIMEOUT
+from township_qa.computer_vision import TownshipCV
 from township_qa.helpers import Locator
+from township_qa.tapper import TownshipTapper
 
 
 class BasePage:
@@ -11,6 +13,8 @@ class BasePage:
 
     def __init__(self, page: WebDriver):
         self._page = page
+        self._vision = TownshipCV(THRESHOLD, WAIT_TIMEOUT)
+        self._tapper = TownshipTapper(page)
         self._set_locators()
 
         self._wait_loaded()

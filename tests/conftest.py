@@ -29,5 +29,7 @@ def driver() -> YieldFixture[WebDriver]:
 
 @pytest.fixture
 def tutorial_page(driver: WebDriver) -> TutorialPage:
-    page = TutorialPage(driver)
-    return page
+    tutorial_page = TutorialPage(driver)
+    tutorial_page = tutorial_page.start_tutorial()
+
+    return tutorial_page

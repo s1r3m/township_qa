@@ -52,6 +52,7 @@ disable = '''
     fixme,
     missing-docstring,
     too-many-arguments,
+    too-many-instance-attributes,
     too-few-public-methods,
     redefined-outer-name,
     no-member,
