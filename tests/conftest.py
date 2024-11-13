@@ -6,7 +6,7 @@ from appium.webdriver.webdriver import WebDriver
 from settings import DEBUG, DEVICE_NAME, DEVICE_UDID, PLATFORM_NAME, PLATFORM_VERSION
 from township_qa.constants import APP_NAME, AppActivity
 from township_qa.helpers import YieldFixture
-from township_qa.pages.main_page import TutorialPage
+from township_qa.pages.tutorial_page import TutorialPage
 
 
 @pytest.fixture

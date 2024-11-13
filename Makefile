@@ -1,3 +1,10 @@
+# Check make version.
+MAKE_MIN_VERSION := 3.82  # MacOS comes with lower version
+MAKE_OK := $(filter $(MAKE_MIN_VERSION),$(firstword $(sort $(MAKE_VERSION) $(MAKE_MIN_VERSION))))
+ifeq ($(MAKE_OK),)
+	$(error Make version required $(MAKE_MIN_VERSION)+, current version: $(MAKE_VERSION))
+endif
+
 # Versions.
 PYTHON = python3.10
 PIP_VERSION = 22.3.1
@@ -10,6 +17,10 @@ export VIRTUAL_ENV ?= $(PROJECT_PATH)/.venv_$(PYTHON)
 
 # Bin.
 VENV_ACTIVATE = $(VIRTUAL_ENV)/bin/activate
+
+# Tests.
+APP_NAME = "com.playrix.township"
+DEVICE_UDID = "AQKSLVH002M41600014"
 
 # Other.
 SHELL = /bin/bash  # Using bash as default shell
@@ -49,8 +60,21 @@ style: $(VENV_ACTIVATE)
 	black $(PROJECT_PATH)/qa
 	isort wotp_qa proxy tests settings.py
 
+## Create an emulator
+emulator:
+	echo "The emulator created and started"
+
+## Start appium server
+appium:
+	appium
+
+## Start emulation and the app
+start: appium emulator
+	echo "The app installed"
+
 ## Run autotests.
 test: $(VENV_ACTIVATE)
+	adb -s $(DEVICE_UDID) shell pm clear $(APP_NAME)
 	pytest tests
 
 

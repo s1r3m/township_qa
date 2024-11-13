@@ -1,5 +1,6 @@
 from appium.webdriver.common.appiumby import AppiumBy
 
+from township_qa.constants import AppActivity
 from township_qa.helpers import Locator
 from township_qa.pages.base import BasePage
 
@@ -10,8 +11,5 @@ class TutorialPage(BasePage):
 
         self._indicator_element = self.ok_policy_button
 
-    def start_tutorial(self) -> 'TutorialPage':
-        return self
-
-    def check_activity(self, expected_activity: str) -> None:
+    def check_activity(self, expected_activity: AppActivity) -> None:
         assert self._page.current_activity == expected_activity
