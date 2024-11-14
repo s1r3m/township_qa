@@ -73,7 +73,6 @@ start: appium emulator
 
 ## Run autotests.
 test: $(VENV_ACTIVATE)
-	adb -s $(DEVICE_UDID) shell pm clear $(APP_NAME)
 	pytest tests
 
 
