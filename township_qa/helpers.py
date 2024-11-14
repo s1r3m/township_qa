@@ -4,3 +4,4 @@ T = TypeVar('T')
 YieldFixture = Generator[T, None, None]
 
 Locator = tuple[str, str]
+Coordinates = tuple[int, int]

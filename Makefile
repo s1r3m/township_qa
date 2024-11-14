@@ -57,8 +57,7 @@ lint: $(VENV_ACTIVATE)
 
 ## Run code formatter.
 style: $(VENV_ACTIVATE)
-	black $(PROJECT_PATH)/qa
-	isort wotp_qa proxy tests settings.py
+	black $(PROJECT_PATH)
 
 ## Create an emulator
 emulator:

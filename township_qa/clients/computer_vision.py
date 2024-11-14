@@ -6,14 +6,16 @@ import cv2
 import numpy as np
 from cv2.typing import MatLike
 
+from township_qa.helpers import Coordinates
+
 
 class TownshipCV:
     def __init__(self, threshold: float, timeout: float):
         self.threshold = threshold
         self.timeout = timeout
-        self.interval = 0.05
+        self.interval = 0.1
 
-    def get_location(self, *image_files: Path) -> tuple[int, int]:
+    def get_location(self, *image_files: Path) -> Coordinates:
         images = []
         for image_file in image_files:
             if not image_file.is_file():
@@ -29,7 +31,7 @@ class TownshipCV:
         image = cv2.imread('screen.png')
         return image
 
-    def _wait_for_image(self, *images: MatLike) -> tuple[int, int]:
+    def _wait_for_image(self, *images: MatLike) -> Coordinates:
         start = time.time()
         while time.time() - start < self.timeout:
             for image in images:
@@ -39,7 +41,7 @@ class TownshipCV:
             time.sleep(self.interval)
         raise TimeoutError(f'Image was not found in {self.timeout} seconds!')
 
-    def _find_image_on_the_screen(self, image: MatLike) -> tuple[int, int] | None:
+    def _find_image_on_the_screen(self, image: MatLike) -> Coordinates | None:
         screen = self._get_screenshot()
         image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         screen_gray = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)

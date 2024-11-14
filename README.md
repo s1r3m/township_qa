@@ -22,6 +22,17 @@ and appium:
    make tests
     ```
 
+#### Contributing
+
+To run all linters:
+```bash
+make lint
+```
+
+To fix code style:
+```bash
+make style
+```
 
 #### Emulators
 
