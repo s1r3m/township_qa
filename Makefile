@@ -51,13 +51,13 @@ endif
 
 ## Run linter.
 lint: $(VENV_ACTIVATE)
-	black --check --diff --color $(PROJECT_PATH)
+	black --check --diff --color $(PROJECT_PATH)/tests $(PROJECT_PATH)/township_qa settings.py
 	pylint $(PROJECT_PATH)/tests $(PROJECT_PATH)/township_qa settings.py
 	mypy $(PROJECT_PATH) --config-file=pyproject.toml
 
 ## Run code formatter.
 style: $(VENV_ACTIVATE)
-	black $(PROJECT_PATH)
+	black $(PROJECT_PATH)/tests $(PROJECT_PATH)/township_qa settings.py
 
 ## Create an emulator
 emulator:
@@ -73,6 +73,7 @@ start: appium emulator
 
 ## Run autotests.
 test: $(VENV_ACTIVATE)
+	adb -s $(DEVICE_UDID) shell pm clear $(APP_NAME)
 	pytest tests
 
 
