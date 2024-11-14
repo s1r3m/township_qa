@@ -1,5 +1,9 @@
 .idea
 
 .venv_*
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.DS_Store
 
 township_qa/images/screen.png
